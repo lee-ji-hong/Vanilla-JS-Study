@@ -24,7 +24,14 @@ const onClickButton = () => {
     word = newWord;
     $word.textContent = word;
   } else {
-    //비어 있지 않다.
+    //비어 있지 않다다. newWord 입력
+    if (word[word.lenth - 1] === newWord[0]) {
+      //제시어의 끝 음절과 새로 입력한 단어의 첫음절이 같다면
+      word = newWord;
+      $word.textContent = word;
+    } else {
+      //올바르지 않다.
+    }
   }
 };
 
