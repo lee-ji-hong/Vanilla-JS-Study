@@ -5,9 +5,9 @@
 // [x] A가 입력한 단어가 출력된다.(제시어가 비어있을 경우 A가 입력한 값을 출력한다.)
 // [x] B는 A가 말할 단어의 끝음절로 시작하는 단어를 말한다.
 // [x] 절차 4번에서 말한 단어가 올바른지 판단한다
-// [] 올바를 경우 c는 B가 말할 단어의 끝음절로 시작하는 단어를 말한다.
-// [] 올바르지 않을 경우에는 실패라고 표시한다.
-// [] 게임을 처음부터 다시 진행한다.
+// [x] 올바를 경우 c는 B가 말할 단어의 끝음절로 시작하는 단어를 말한다.
+// [x] 올바르지 않을 경우에는 실패라고 표시한다.
+// [x] 게임을 처음부터 다시 진행한다.
 
 const number = Number(prompt("몇 명이 참가하나요?"));
 const $button = document.querySelector(".btn-ghost");
@@ -22,13 +22,14 @@ const onClickButton = () => {
     //제시어가 비어 있는 경우
     word = newWord;
     $word.textContent = word;
-    $input.value = "";
     const order = Number($order.textContent);
     if (order + 1 > number) {
       $order.textContent = 1;
     } else {
       $order.textContent = order + 1;
     }
+    $input.value = "";
+    $input.focus();
   } else {
     //제시어가 비어있지 않는 경우
     if (word[word.length - 1] === newWord[0]) {
@@ -36,14 +37,20 @@ const onClickButton = () => {
       word = newWord;
       $word.textContent = word;
       $input.value = "";
+      const order = Number($order.textContent);
       if (order + 1 > number) {
         $order.textContent = 1;
       } else {
         $order.textContent = order + 1;
       }
+      $input.value = "";
+      $input.focus();
     } else {
       //올바르지 않다.
+      alert("올바르지 않은 단어입니다");
     }
+    $input.value = "";
+    $input.focus();
   }
 };
 
