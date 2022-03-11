@@ -21,8 +21,8 @@ let word; //제시어(제시어는 빈 값으로 놔둔다)
 let newWord; // 새로 입력한 단어
 
 const onClickButton = () => {
-  if (!word) {
-    //제시어가 비어 있는 경우
+  if (!word || word[word.length - 1] === newWord[0]) {
+    //제시어가 비어있거나 입력한 단어가 올바른 경우
     word = newWord;
     $word.textContent = word;
     const order = Number($order.textContent);
@@ -31,38 +31,20 @@ const onClickButton = () => {
     } else {
       $order.textContent = order + 1;
     }
-    $input.value = "";
-    $input.focus();
   } else {
-    //제시어가 비어있지 않는 경우
-    if (word[word.length - 1] === newWord[0]) {
-      //제시어의 끝 음절과 새로 입력한 단어의 첫음절이 같다면
-      word = newWord;
-      $word.textContent = word;
-      $input.value = "";
-      const order = Number($order.textContent);
-      if (order + 1 > number) {
-        $order.textContent = 1;
-      } else {
-        $order.textContent = order + 1;
-      }
-      $input.value = "";
-      $input.focus();
-    } else {
-      //올바르지 않다.
-      alert("올바르지 않은 단어입니다");
-    }
-    $input.value = "";
-    $input.focus();
+    //올바르지 않다.
+    alert("올바르지 않은 단어입니다");
   }
+  $input.value = "";
+  $input.focus();
 };
 const onInput = (e) => {
   newWord = e.target.value;
 };
 const enterkeypress = (e) => {
   if (e.key === "Enter") {
-    if (!word) {
-      //제시어가 비어 있는 경우
+    if (!word || word[word.length - 1] === newWord[0]) {
+      //제시어가 비어있거나 입력한 단어가 올바른 경우
       word = newWord;
       $word.textContent = word;
       const order = Number($order.textContent);
@@ -71,30 +53,12 @@ const enterkeypress = (e) => {
       } else {
         $order.textContent = order + 1;
       }
-      $input.value = "";
-      $input.focus();
     } else {
-      //제시어가 비어있지 않는 경우
-      if (word[word.length - 1] === newWord[0]) {
-        //제시어의 끝 음절과 새로 입력한 단어의 첫음절이 같다면
-        word = newWord;
-        $word.textContent = word;
-        $input.value = "";
-        const order = Number($order.textContent);
-        if (order + 1 > number) {
-          $order.textContent = 1;
-        } else {
-          $order.textContent = order + 1;
-        }
-        $input.value = "";
-        $input.focus();
-      } else {
-        //올바르지 않다.
-        alert("올바르지 않은 단어입니다");
-      }
-      $input.value = "";
-      $input.focus();
+      //올바르지 않다.
+      alert("올바르지 않은 단어입니다");
     }
+    $input.value = "";
+    $input.focus();
   }
 };
 
