@@ -9,6 +9,9 @@
 // [x] 올바르지 않을 경우에는 실패라고 표시한다.
 // [x] 게임을 처음부터 다시 진행한다.
 
+//TODO 추가 기능 구현
+// [x] 입력한 값들이 enter를 쳤을 때 출력된다.
+
 const number = Number(prompt("몇 명이 참가하나요?"));
 const $button = document.querySelector(".btn-ghost");
 const $input = document.querySelector(".main-input");
@@ -53,11 +56,48 @@ const onClickButton = () => {
     $input.focus();
   }
 };
-
-// input에 글자 입력 이벤트
 const onInput = (e) => {
   newWord = e.target.value;
+};
+const enterkeypress = (e) => {
+  if (e.key === "Enter") {
+    if (!word) {
+      //제시어가 비어 있는 경우
+      word = newWord;
+      $word.textContent = word;
+      const order = Number($order.textContent);
+      if (order + 1 > number) {
+        $order.textContent = 1;
+      } else {
+        $order.textContent = order + 1;
+      }
+      $input.value = "";
+      $input.focus();
+    } else {
+      //제시어가 비어있지 않는 경우
+      if (word[word.length - 1] === newWord[0]) {
+        //제시어의 끝 음절과 새로 입력한 단어의 첫음절이 같다면
+        word = newWord;
+        $word.textContent = word;
+        $input.value = "";
+        const order = Number($order.textContent);
+        if (order + 1 > number) {
+          $order.textContent = 1;
+        } else {
+          $order.textContent = order + 1;
+        }
+        $input.value = "";
+        $input.focus();
+      } else {
+        //올바르지 않다.
+        alert("올바르지 않은 단어입니다");
+      }
+      $input.value = "";
+      $input.focus();
+    }
+  }
 };
 
 $button.addEventListener("click", onClickButton);
 $input.addEventListener("input", onInput);
+$input.addEventListener("keypress", enterkeypress);
