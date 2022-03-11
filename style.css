@@ -1289,7 +1289,7 @@ ul.nested-comments  ul li {
 /* Inputs */
 
 input:not([type=submit]):not([type=file]), textarea {
-  width: 100% !important;
+  /* width: 100% !important; */
   height: 50px;
   margin-bottom: 25px;
   padding: 0 15px 2px;
